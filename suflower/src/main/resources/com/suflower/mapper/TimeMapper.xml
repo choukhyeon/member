@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mynatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- Annotation 뿐만아니라 xml도 같이 쓰기위한 방식-->
+<mapper namespace="com.suflower.mapper.TimeMapper">
+
+	<select id ="getTime2" resultType="string">
+		SELECT sysdate FROM dual
+	</select>
+	
+	
+	
+	
+	
+	
+</mapper>
