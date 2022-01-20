@@ -57,16 +57,6 @@
 					</div>
 					<span class="final_mail_ck">이메일을 입력해주세요.</span>
 					<span class="mail_input_box_warn"></span>
-					<div class="mail_check_wrap">
-						<div class="mail_check_input_box" id="mail_check_input_box_false">
-							<input class="mail_check_input" disabled="disabled">
-						</div>
-						<div class="mail_check_button">
-							<span>인증번호 전송</span>
-						</div>
-						<div class="clearfix"></div>
-						<span id="mail_check_input_box_warn"></span>
-					</div>
 				</div>
 				<div class="address_wrap">
 					<div class="address_name">주소</div>
@@ -216,54 +206,6 @@
 					}); // ajax 종료
 				});//function종료
 
-		/* 인증번호 이메일 전송 */
-		$(".mail_check_button").click(function() {
-
-			var email = $(".mail_input").val(); //입력한 이메일
-			var checkBox = $(".mail_check_input");
-			var boxWrap = $(".mail_check_input_box");
-			var warnMsg = $(".mail_input_box_warn");	//이메일 입력 경고글
-			
-			/* 이메일 형식 유효성 검사 */
-			if(mailFormCheck(email)){
-				warnMsg.html("이메일이 전송 되었습니다. 이메일을 확인해 주세요");
-				warnMsg.css("display", "inline-block");
-			}else{
-				
-				warnMsg.html("올바르지 못한 이메일 형식입니다.");
-				warnMsg.css("display", "inline-block");
-				return false;
-			}
-
-			$.ajax({
-
-				type : "GET",
-				url : "mailCheck?email=" + email,
-				success : function(data) {
-
-					//console.log("data:" +data);
-					checkBox.attr("disabled", false);
-					boxWrap.attr("id", "mail_check_input_box_true");
-					code = data;
-				}
-			});
-		});
-		/* 인증번호 비교 */
-		$(".mail_check_input").blur(function() {
-
-			var inputCode = $(".mail_check_input").val(); //입력코드
-			var checkResult = $("#mail_check_input_box_warn"); //비교결과
-
-			if (inputCode == code) {
-				checkResult.html("인증번호가 일치합니다.");
-				checkResult.attr("class", "correct");
-				mailnumCheck = true;
-			} else {
-				checkResult.html("인증번호를 다시 확인해주세요.");
-				checkResult.attr("class", "incorrect");
-				mailnumCheck = false;
-			}
-		});
 
 		/* 다음 주소 연동 */
 		function execution_daum_address() {
