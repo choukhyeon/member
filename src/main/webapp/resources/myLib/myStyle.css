@@ -1,0 +1,50 @@
+@charset "UTF-8";
+
+a {color:gray; text-decoration:none; font-weight:bold;}
+/*  a Tag 에 마우스가 닿으면 글씨 blue, 클릭하면 글씨 green */
+a:hover {color:DimGray; font-size: 1.2em;}
+a:active {color:green;}
+
+navcontainer{
+	background-color: white;
+}
+
+nav-log{
+	
+	
+}
+
+h3 {color:blue; font-size: 30px; }
+
+
+  table:not(.memberdetail,.updatetable) {
+    width: 100%;
+    border: 1px solid #444444;
+    border-collapse: collapse;
+  }
+  th,td:not(.active){
+    border: 1px solid #444444;
+  }
+
+/* Link Button 만들기 
+button {
+	width:140px; height:70px; background-color:aqua;
+	border-radius:20px; border: 5px solid lightgray;
+	text-align:center; color:gray; font-weight:bold;
+}
+button:hover {color:DimGray; font-size: 1.2em;}
+button:active {color:green;}
+*/
+.eMessage {	color:red;
+			font-size:x-small;
+			font-style:italic;
+			}
+/*  Check  List searchBar */
+#searchBar {
+	color:DimGray ; font-family:돋움; font-size:16px;
+	float: left;
+}
+.textLink {
+	color: blue; font-weight: bold;
+}
+			
