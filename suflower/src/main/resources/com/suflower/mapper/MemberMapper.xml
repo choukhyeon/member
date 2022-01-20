@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.suflower.mapper.MemberMapper">
+	<insert id="memberJoin">
+		insert into tbl_member values(#{memberId}, #{memberPassword}, #{memberName},
+		#{memberMail}, #{memberAddr1}, #{memberAddr2}, #{memberAddr3}, #{memberPhoneNum}, 0, 
+		sysdate, 100000, 5000 )
+
+	</insert>
+
+	<!-- 아이디 중복검사 -->
+	<select id="idCheck" resultType="int">
+
+		select count(*) from tbl_member where memberId = #{memberId}
+
+	</select>
+
+	<!-- 로그인 -->
+	<select id="memberLogin"
+		resultType="com.suflower.domain.MemberVO">
+
+		select memberId, memberName, adminCheck, memberMoney, memberPoint from tbl_member
+		where memberId = #{memberId} and memberPassword= #{memberPassword}
+	</select>
+</mapper>

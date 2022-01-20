@@ -30,8 +30,8 @@ public class RootConfig {
 		//SQL Log를 제대로 보기위한 log4jdbc 라이브러리 사용후 설정
 		hikariConfig.setDriverClassName("net.sf.log4jdbc.sql.jdbcapi.DriverSpy");
 		hikariConfig.setJdbcUrl("jdbc:log4jdbc:oracle:thin:@localhost:1521:XE");
-		hikariConfig.setUsername("suflower");
-		hikariConfig.setPassword("password");
+		hikariConfig.setUsername("system");
+		hikariConfig.setPassword("oracle");
 		
 		HikariDataSource dataSource = new HikariDataSource(hikariConfig);
 		
