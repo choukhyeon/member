@@ -1,6 +1,11 @@
 package com.suflower.mapper;
 
+import java.util.List;
+
+import org.apache.ibatis.annotations.Select;
+
 import com.suflower.domain.MemberVO;
+import com.suflower.domain.ProductVO;
 
 public interface MemberMapper {
 
@@ -12,4 +17,7 @@ public interface MemberMapper {
 	
 	/* 로그인 */
 	public MemberVO memberLogin(MemberVO member);
+
+	@Select("select * from tbl_member ")
+	public List<MemberVO> memberList();
 }
