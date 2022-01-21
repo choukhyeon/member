@@ -20,13 +20,13 @@ public interface BoardService {
 	public int getTotal();
 	
 	// 게시글 조회
-	public BoardVO getPage(int bno);
+	public BoardVO getPage(long boardNo);
 	
 	// 게시글 수정
 	public int modify(BoardVO board);
 	
 	// 게시글 삭제
-	public int delete(int bno);
+	public int delete(long boardNo);
 	
 	// 게시판 총 갯수
 	public int getTotal(Criteria cri);

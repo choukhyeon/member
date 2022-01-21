@@ -83,23 +83,16 @@ public class MemberController {
 		/* 로그인 */
 		@RequestMapping(value = "login", method = RequestMethod.POST)
 		public String loginPOST(HttpServletRequest request, MemberVO member, RedirectAttributes rttr) throws Exception{
-			
 //			System.out.println("login 메서드 진입");
 //			System.out.println("전달된 데이터 :" +member);
-			
 			HttpSession session = request.getSession();
 			MemberVO lvo = memberservice.memberLogin(member);
-			
 			if(lvo == null) {
-				
 				int result = 0;
 				rttr.addFlashAttribute("result", result);
 				return "redirect: /member/login";
-				
 			}
-			
 			session.setAttribute("member", lvo);
-			
 			return "redirect:/main";
 		}
 }

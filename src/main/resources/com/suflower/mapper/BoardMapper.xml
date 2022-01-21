@@ -6,10 +6,8 @@
 
 	<!-- 작성 -->
 	<insert id="bwrite">
-		insert into tbl_board(boardNo,boardTitle, boardContent,
-		boardWriter)
-		values
-		(SEQ_BOARD.nextval,#{boardTitle}, #{boardContent},#{boardWriter})
+		insert into tbl_board(boardNo,boardTitle, boardContent,boardWriter)
+		values (SEQ_BOARD.nextval,#{boardTitle}, #{boardContent},#{boardWriter})
 	</insert>
 
 	<!-- blist조회 -->

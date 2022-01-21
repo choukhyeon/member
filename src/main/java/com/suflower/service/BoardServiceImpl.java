@@ -41,8 +41,8 @@ public class BoardServiceImpl implements BoardService {
 	
 	// 게시글  조회
 	@Override
-	public  BoardVO getPage(int bno) {
-		return mapper.getPage(bno);
+	public  BoardVO getPage(long boardNo) {
+		return mapper.getPage(boardNo);
 	}
 	
 	// 게시글 수정
@@ -53,8 +53,8 @@ public class BoardServiceImpl implements BoardService {
 	
 	// 게시글 삭제
 	@Override
-	public int delete(int bno) {
-		return mapper.delete(bno);
+	public int delete(long boardNo) {
+		return mapper.delete(boardNo);
 	}
 	
 	//게시물 총 갯수

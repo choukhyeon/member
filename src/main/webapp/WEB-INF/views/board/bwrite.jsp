@@ -9,14 +9,14 @@
 <body>
 	<form action="/board/bwrite" method="post">
 		<div class="input_wrap">
-			<label>Title</label> <input name="title">
+			<label>Title</label> <input name="boardTitle">
 		</div>
 		<div class="input_wrap">
 			<label>Content</label>
-			<textarea rows="3" name="content"></textarea>
+			<textarea rows="3" name="boardContent"></textarea>
 		</div>
 		<div class="input_wrap">
-			<label>Writer</label> <input name="writer">
+			<label>Writer</label> <input name="boardWriter">
 		</div>
 		<button class="btn"> 전송 </button>
 	</form>

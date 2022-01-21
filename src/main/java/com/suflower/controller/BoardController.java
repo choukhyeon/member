@@ -1,6 +1,5 @@
 package com.suflower.controller;
 
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -39,38 +38,14 @@ public class BoardController {
 	@Autowired
 	MemberService service;
 
-	// 게시판 리스트 조회 (blist)
-	/*
-	 * @GetMapping("/blist") public void boardListGet(Model model) {
-	 * log.info("게시판 목록 페이지 진입!"); model.addAttribute("blist", bservice.getList());
-	 * }
-	 * 
-	 */
-
+	// 세션 확인용
+	@GetMapping("/session")
+	public void SessionGet() {
+	}
 
 	// 게시글 페이징 조회
-
 	@GetMapping("/blist")
-	public void boardListGET(MemberVO vo,Model model, Criteria cri, HttpServletRequest request) {
-		// request.getSession(false)를 하면 세션 없으면 그냥 null으로 표기
-		// 반대로 request.getSession() 을 하면 세션이 없으면 만듦
-		
-	      if (vo.getMemberId()==null || vo.getMemberId().length()<1) {
-	          HttpSession session = request.getSession(false);
-	          System.out.println("vo=>"+vo.getMemberId());
-	          if ( session!=null && session.getAttribute("loginID")!=null ) {
-	             vo.setMemberId((String)session.getAttribute("loginID"));
-	             System.out.println(session.getAttribute("loginID"));
-	          }
-	       }
-		/*
-		 * HttpSession session = request.getSession(false); if
-		 * (session.getAttribute("loginID")==null) {
-		 * System.out.println(session.getAttribute("loginID")); } else {
-		 * System.out.println(session.getAttribute("loginID"));
-		 * System.out.println("세션 아이디가 유효하지 않습니다.");
-		 */
-
+	public void boardListGET(Model model, Criteria cri) {
 		log.info("boardListGET");
 		model.addAttribute("blist", bservice.getListPaging(cri));
 		int total = bservice.getTotal(cri);
@@ -78,25 +53,27 @@ public class BoardController {
 		model.addAttribute("pageMaker", pageMake);
 	}
 
-	// 세션 확인용
-	@GetMapping("/session")
-	public void SessionGet() {
-		log.info("세션 가지러옴ㅋㅋ");
-	}
-
 	// 게시글 조회
 	@GetMapping("/get")
-	public String boardGetPageGET(int bno, Model model, Criteria cri,HttpServletRequest request,RedirectAttributes rttr) {
-      if (request.getAttribute("loginID")!=null) {
-    	  System.out.println("게시글 진입");
-    	  model.addAttribute("pageInfo", bservice.getPage(bno));
-          model.addAttribute("cri",cri);
-          return "redirect:/board/bwrite";
-          
-      }else {
-    	  rttr.addFlashAttribute("result","login check");
-    	  return "redirect:/member/loginf";
-      }
+	public String boardGetPageGET(long boardNo, Model model, Criteria cri, HttpServletRequest request,MemberVO vo,RedirectAttributes rttr) {
+		if (request.getAttribute("loginID") != null) {
+			// request.getSession(false)를 하면 세션 없으면 그냥 null으로 표기
+			// 반대로 request.getSession() 을 하면 세션이 없으면 만듦
+			if (vo.getMemberId() == null || vo.getMemberId().length() < 1) {
+				HttpSession session = request.getSession(false);
+				System.out.println("vo=>" + vo.getMemberId());
+				if (session != null && session.getAttribute("loginID") != null) {
+					vo.setMemberId((String) session.getAttribute("loginID"));
+					System.out.println(session.getAttribute("loginID"));
+					System.out.println("게시글 진입");
+					model.addAttribute("pageInfo", bservice.getPage(boardNo));
+					model.addAttribute("cri", cri);
+					return "redirect:/board/bwrite";
+				}
+			}
+		}else {
+			rttr.addFlashAttribute("result", "login check");}
+			return "redirect:/member/login";
 	}
 
 	// 게시판 작성폼 (bwrite)
@@ -107,8 +84,8 @@ public class BoardController {
 
 	// 수정 페이지로 이동
 	@GetMapping("/modify")
-	public void boardModifyGET(int bno, Model model, Criteria cri) {
-		model.addAttribute("pageInfo", bservice.getPage(bno));
+	public void boardModifyGET(long boardNo, Model model, Criteria cri) {
+		model.addAttribute("pageInfo", bservice.getPage(boardNo));
 		model.addAttribute("cri", cri);
 	}
 
@@ -134,10 +111,18 @@ public class BoardController {
 
 	// 게시글 삭제
 	@PostMapping("/delete")
-	public String boardDeletePost(int bno, RedirectAttributes rttr) {
-		bservice.delete(bno);
+	public String boardDeletePost(long boardNo, RedirectAttributes rttr) {
+		bservice.delete(boardNo);
 		rttr.addFlashAttribute("result", "delete success");
 		return "redirect:/board/blist";
 	}
 
 }
+
+/*
+ * // 게시판 리스트 조회 (blist)
+ * 
+ * @GetMapping("/blist") public void boardListGet(Model model) {
+ * log.info("게시판 목록 페이지 진입!"); model.addAttribute("blist", bservice.getList());
+ * }
+ */

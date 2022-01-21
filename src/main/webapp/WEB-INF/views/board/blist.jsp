@@ -86,29 +86,11 @@
 	<a href="/board/bwrite" class="top_btn" id="popbutton">게시판 등록</a>
 	<a href="/">[Home]</a>
 	
-		<div class="modal fade" id="myModal" tabindex="-1" role="dialog"
-		aria-labelledby="myModalLabel" aria-hidden="true">
-		<div class="modal-dialog">
-			<div class="modal-boardContent">
-				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal"
-						aria-hidden="true">&times;</button>
-					<h4 class="modal-boardTitle" id="myModalLabel">Modal boardTitle</h4>
-				</div>
-				<div class="modal-body">처리가 완료되었습니다.</div>
-				<div class="modal-footer">
-					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-					<button type="button" class="btn btn-primary">Save changes</button>
-				</div>
-			</div>
-			<!--  /.modal-boardContent -->
-		</div>
-		<!--  /.modal-dialog -->
-	</div>
-	<!--  /.modal -->
 
-	
-<%-- 		// 등록 완료 alert function 
+
+<script type="text/javascript">
+   
+ 		// 등록 완료 alert function 
 		$(document).ready(function() {
 
 			var result = '<c:out value="${result}"/>';
@@ -118,7 +100,7 @@
 					return;
 				}
 				if (result === "bwrite success") {
-					$(".modal-body").html("게시글 등록이 완료되었습니다.");
+					alert("작성이 완료됐당..");
 				}
 				$("#myModal").modal("show");
 				if (result === "delete success") {
@@ -136,29 +118,7 @@
 
 			}
 		}); 
-		 --%>
-		 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-         <script type="text/javascript">
-          
-          $(document).ready(function() {
-          	var result = '<c:out value="${result}"/>';
-          	checkModal(result);
-          	history.replaceState({},null,null);
-          	function checkModal(result) {
-          		if( result === '' || history.state) {
-          			return;
-          		}
-          		if (result === 'bwrite success') {
-          			 $(".modal-body").html("게시글 작성 등록되었습니다.");
-          		}
-          		$("#myModal").modal("show");
-          	}
-          	$("#regBtn").on("click", function(){
-          		self.location ="/board/register";
-          	});
-          });
-          			 
-          
+
 		let moveForm = $("#moveForm");
 		$(".move").on(
 				"click",
