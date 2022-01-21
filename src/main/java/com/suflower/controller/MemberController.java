@@ -44,7 +44,7 @@ public class MemberController {
 		
 		logger.info("join Service 성공");
 		
-		return "redirect:/main";
+		return "redirect:/home";
 		
 	}
 	
@@ -100,6 +100,6 @@ public class MemberController {
 			
 			session.setAttribute("member", lvo);
 			
-			return "redirect:/main";
+			return "redirect:/home";
 		}
 }

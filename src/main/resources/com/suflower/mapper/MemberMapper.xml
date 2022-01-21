@@ -5,7 +5,7 @@
 <mapper namespace="com.suflower.mapper.MemberMapper">
 	<insert id="memberJoin">
 		insert into tbl_member values(#{memberId}, #{memberPassword}, #{memberName},
-		#{memberMail}, #{memberAddr1}, #{memberAddr2}, #{memberAddr3}, #{memberPhoneNum}, 0, 
+		#{memberMail}, #{memberPhoneNum}, #{memberAddr1}, #{memberAddr2}, #{memberAddr3}, 0, 
 		sysdate, 100000, 5000 )
 
 	</insert>

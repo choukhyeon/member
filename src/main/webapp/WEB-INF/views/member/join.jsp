@@ -5,7 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link rel="stylesheet" href="/resources/css/member/join.css">
+<link rel="stylesheet" href="/resources/myLib/memberCss/join.css">
 <script src="https://code.jquery.com/jquery-3.4.1.js"
 	integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
 	crossorigin="anonymous"></script>
@@ -30,7 +30,7 @@
 				<div class="pw_wrap">
 					<div class="pw_name">비밀번호</div>
 					<div class="pw_input_box">
-						<input class="pw_input" name="memberPw">
+						<input class="pw_input" name="memberPassword">
 					</div>
 					<span class="final_pw_ck">비밀번호를 입력해주세요.</span>
 				</div>
@@ -55,8 +55,15 @@
 					<div class="mail_input_box">
 						<input class="mail_input" name="memberMail">
 					</div>
-					<span class="final_mail_ck">이메일을 입력해주세요.</span>
-					<span class="mail_input_box_warn"></span>
+					<span class="final_mail_ck">이메일을 입력해주세요.</span> <span
+						class="mail_input_box_warn"></span>
+				</div>
+				<div class="phonenum_wrap">
+					<div class="phonenum_name">핸드폰 번호</div>
+					<div class="phonenum_input_box">
+					<input class="phonenum_input" name="memberPhoneNum">
+					</div>
+					<span class="final_phonenum_ck">핸드폰 번호를 입력해 주세요</span>
 				</div>
 				<div class="address_wrap">
 					<div class="address_name">주소</div>
@@ -93,7 +100,6 @@
 	<script
 		src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 	<script>
-		var code = ""; //이메일 전송 인증번호 저장위한 코드
 		/* 유효성 검사 통과유무 변수 */
 		var idCheck = false; // 아이디
 		var idckCheck = false; // 아이디 중복 검사
@@ -102,77 +108,108 @@
 		var pwckcorCheck = false; // 비번 확인 일치 확인
 		var nameCheck = false; // 이름
 		var mailCheck = false; // 이메일
-		var mailnumCheck = false; // 이메일 인증번호 확인
+		var phonenumCheck = false; //전화번호
 		var addressCheck = false; // 주소
+		
 
-		$(document).ready(function() {
-			//회원가입 버튼(회원가입 기능 작동)
-			$(".join_button").click(function() {
+		$(document).ready(
+				function() {
+					//회원가입 버튼(회원가입 기능 작동)
+					$(".join_button")
+							.click(
+									function() {
 
-				/* 입력값 변수 */
-				var id = $('.id_input').val(); // id 입력란
-				var pw = $('.pw_input').val(); // 비밀번호 입력란
-				var pwck = $('.pwck_input').val(); // 비밀번호 확인 입력란
-				var name = $('.user_input').val(); // 이름 입력란
-				var mail = $('.mail_input').val(); // 이메일 입력란
-				var addr = $('.address_input_3').val(); // 주소 입력란
+										/* 입력값 변수 */
+										var id = $('.id_input').val(); // id 입력란
+										var pw = $('.pw_input').val(); // 비밀번호 입력란
+										var pwck = $('.pwck_input').val(); // 비밀번호 확인 입력란
+										var name = $('.user_input').val(); // 이름 입력란
+										var mail = $('.mail_input').val(); // 이메일 입력란
+										var phonenum = $('.phonenum_input').val(); //전화번호 입력란
+										var addr = $('.address_input_3').val(); // 주소 입력란
 
-				/*  아이디 유효성 검사 */
-				if (id == "") {
-					$('.final_id_ck').css('display', 'block');
-					idCheck = false;
-				} else {
-					$('.final_id_ck').css('display', 'none');
-					idCheck = true;
-				}
-				/*  비밀번호 유효성 검사 */
-				if (pw == "") {
-					$('.final_pw_ck').css('display', 'block');
-					pwCheck = false;
-				} else {
-					$('.final_pw_ck').css('display', 'none');
-					pwCheck = true;
-				}
-				/*  비밀번호 확인 유효성 검사 */
-				if (pwck == "") {
-					$('.final_pwck_ck').css('display', 'block');
-					pwckCheck = false;
-				} else {
-					$('.final_pwck_ck').css('display', 'none');
-					pwckCheck = true;
-				}
-				/* 이름 유효성 검사 */
-				if(name == ""){
-					$('.final_name_ck').css('display','block');
-					nameCheck = false;
-				}else{
-					$('.final_name_ck').css('display','none');
-					nameCheck = true;
-				}
-				/*이메일 유효성 검사*/
-				if(mail ==""){
-					$('.final_mail_ck').css('display','block');
-					mailCheck = false;
-				}else{
-					$('.final_mail_ck').css('display','none');
-					mailCheck = true;
-				}
-				/* 주소 유효성 검사 */
-				if(addr == ""){
-					$('.final_addr_ck').css('display','block');
-					addressCheck = false;
-				}else{
-					$('.final_addr_ck').css('display','none');
-					addressCheck = true;
-				}
-				/* 최종 유효성 검사 */
-		        if(idCheck&&idckCheck&&pwCheck&&pwckCheck&&pwckcorCheck&&nameCheck&&mailCheck&&mailnumCheck&&addressCheck){
-		 			$("#join_form").attr("action", "/member/join");
-		 			$("#join_form").submit();
-		        }  
-				return false;
-			});
-		});
+										/*  아이디 유효성 검사 */
+										if (id == "") {
+											$('.final_id_ck').css('display',
+													'block');
+											idCheck = false;
+										} else {
+											$('.final_id_ck').css('display',
+													'none');
+											idCheck = true;
+										}
+										/*  비밀번호 유효성 검사 */
+										if (pw == "") {
+											$('.final_pw_ck').css('display',
+													'block');
+											pwCheck = false;
+										} else {
+											$('.final_pw_ck').css('display',
+													'none');
+											pwCheck = true;
+										}
+										/*  비밀번호 확인 유효성 검사 */
+										if (pwck == "") {
+											$('.final_pwck_ck').css('display',
+													'block');
+											pwckCheck = false;
+										} else {
+											$('.final_pwck_ck').css('display',
+													'none');
+											pwckCheck = true;
+										}
+										/* 이름 유효성 검사 */
+										if (name == "") {
+											$('.final_name_ck').css('display',
+													'block');
+											nameCheck = false;
+										} else {
+											$('.final_name_ck').css('display',
+													'none');
+											nameCheck = true;
+										}
+										/*이메일 유효성 검사*/
+										if (mail == "") {
+											$('.final_mail_ck').css('display',
+													'block');
+											mailCheck = false;
+										} else {
+											$('.final_mail_ck').css('display',
+													'none');
+											mailCheck = true;
+										}
+										
+										/* 전화번호 유효성 검사 */
+										if(phonenum ==""){
+											$('.final_phonenum_ck').css('display','block');
+											phonenumCheck = false;
+										}else{
+											$('.final_phonenum_ck').css('display','none');
+											phonenumCheck = true;
+										}
+										
+										/* 주소 유효성 검사 */
+										if (addr == "") {
+											$('.final_addr_ck').css('display',
+													'block');
+											addressCheck = false;
+										} else {
+											$('.final_addr_ck').css('display',
+													'none');
+											addressCheck = true;
+										}
+										/* 최종 유효성 검사 */
+										if (idCheck && idckCheck && pwCheck
+												&& pwckCheck && pwckcorCheck
+												&& nameCheck && mailCheck && phonenumCheck
+												&& addressCheck) {
+											$("#join_form").attr("action",
+													"/member/join");
+											$("#join_form").submit();
+										}
+										return false;
+									});
+				});
 
 		//아이디 중복검사
 		$('.id_input').on(
@@ -205,7 +242,6 @@
 						}// success 종료
 					}); // ajax 종료
 				});//function종료
-
 
 		/* 다음 주소 연동 */
 		function execution_daum_address() {
@@ -282,9 +318,9 @@
 						pwckcorCheck = false;
 					}
 				});
-		
+
 		/* 입력 이메일 형식 유효성 검사 */
-		function mailFormCheck(email){
+		function mailFormCheck(email) {
 			var form = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i;
 			return form.test(email);
 		}
