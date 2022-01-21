@@ -40,7 +40,7 @@ public class MemberController {
 		// 회원가입 서비스 실행
 		memberservice.memberJoin(member);
 		logger.info("join Service 성공");
-		return "redirect:/home";
+		return "redirect:/";
 		
 	}
 	
@@ -78,6 +78,6 @@ public class MemberController {
 				return "redirect: /member/login";
 			}
 			session.setAttribute("member", lvo);
-			return "redirect:/home";
+			return "redirect:/";
 		}
 }
