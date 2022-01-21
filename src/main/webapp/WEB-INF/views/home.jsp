@@ -37,11 +37,11 @@
 			
 			<form class="form-inline my-2 my-md-0">
 				<c:if test="${empty loginID}">
-					<a class="bi-person-circle me-1" href="/member/loginf">로그인</a>&nbsp;&nbsp;
+					<a class="bi-person-circle me-1" href="/member/login">로그인</a>&nbsp;&nbsp;
 					<br>
 				</c:if>
 				<c:if test="${empty loginID}">
-					<a class="bi-person-circle me-1" href="/member/joinf">회원가입</a>&nbsp;&nbsp;
+					<a class="bi-person-circle me-1" href="/member/join">회원가입</a>&nbsp;&nbsp;
 					<br>
 				</c:if>
 				<c:if test="${not empty loginID}">
