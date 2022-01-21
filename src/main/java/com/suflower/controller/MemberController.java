@@ -36,14 +36,10 @@ public class MemberController {
 	//회원가입
 	@RequestMapping(value="/join", method=RequestMethod.POST)
 	public String joinPOST(MemberVO member) throws Exception{
-		
 		logger.info("join 진입");
-		
 		// 회원가입 서비스 실행
 		memberservice.memberJoin(member);
-		
 		logger.info("join Service 성공");
-		
 		return "redirect:/home";
 		
 	}
@@ -58,48 +54,30 @@ public class MemberController {
 		@RequestMapping(value = "/memberIdChk", method = RequestMethod.POST)
 		@ResponseBody
 		public String memberIdChkPOST(String memberId) throws Exception{
-			
 			/* logger.info("memberIdChk() 진입"); */
-			
 			logger.info("memberIdChk() 진입");
-			
 			int result = memberservice.idCheck(memberId);
-			
 			logger.info("결과값 = " + result);
-			
 			if(result != 0) {
-				
 				return "fail";	// 중복 아이디가 존재
-				
 			} else {
-				
 				return "success";	// 중복 아이디 x
-				
 			}
-			
 		} // memberIdChkPOST() 종료
-		
 		
 		/* 로그인 */
 		@RequestMapping(value = "login", method = RequestMethod.POST)
 		public String loginPOST(HttpServletRequest request, MemberVO member, RedirectAttributes rttr) throws Exception{
-			
 //			System.out.println("login 메서드 진입");
 //			System.out.println("전달된 데이터 :" +member);
-			
 			HttpSession session = request.getSession();
 			MemberVO lvo = memberservice.memberLogin(member);
-			
 			if(lvo == null) {
-				
 				int result = 0;
 				rttr.addFlashAttribute("result", result);
 				return "redirect: /member/login";
-				
 			}
-			
 			session.setAttribute("member", lvo);
-			
 			return "redirect:/home";
 		}
 }
