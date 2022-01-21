@@ -30,7 +30,7 @@
 				<div class="pw_wrap">
 					<div class="pw_name">비밀번호</div>
 					<div class="pw_input_box">
-						<input class="pw_input" name="memberPassword">
+						<input type="password" class="pw_input" name="memberPassword">
 					</div>
 					<span class="final_pw_ck">비밀번호를 입력해주세요.</span>
 				</div>
