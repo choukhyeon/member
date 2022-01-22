@@ -30,14 +30,14 @@
 				<div class="pw_wrap">
 					<div class="pw_name">비밀번호</div>
 					<div class="pw_input_box">
-						<input class="pw_input" name="memberPassword">
+						<input type="password" class="pw_input" name="memberPassword">
 					</div>
 					<span class="final_pw_ck">비밀번호를 입력해주세요.</span>
 				</div>
 				<div class="pwck_wrap">
 					<div class="pwck_name">비밀번호 확인</div>
 					<div class="pwck_input_box">
-						<input class="pwck_input">
+						<input type="password" class="pwck_input">
 					</div>
 					<span class="final_pwck_ck">비밀번호 확인을 입력해주세요.</span> <span
 						class="pwck_input_re_1">비밀번호가 일치합니다</span> <span
@@ -61,7 +61,7 @@
 				<div class="phonenum_wrap">
 					<div class="phonenum_name">핸드폰 번호</div>
 					<div class="phonenum_input_box">
-					<input class="phonenum_input" name="memberPhoneNum">
+						<input class="phonenum_input" name="memberPhoneNum">
 					</div>
 					<span class="final_phonenum_ck">핸드폰 번호를 입력해 주세요</span>
 				</div>
@@ -110,7 +110,6 @@
 		var mailCheck = false; // 이메일
 		var phonenumCheck = false; //전화번호
 		var addressCheck = false; // 주소
-		
 
 		$(document).ready(
 				function() {
@@ -125,7 +124,8 @@
 										var pwck = $('.pwck_input').val(); // 비밀번호 확인 입력란
 										var name = $('.user_input').val(); // 이름 입력란
 										var mail = $('.mail_input').val(); // 이메일 입력란
-										var phonenum = $('.phonenum_input').val(); //전화번호 입력란
+										var phonenum = $('.phonenum_input')
+												.val(); //전화번호 입력란
 										var addr = $('.address_input_3').val(); // 주소 입력란
 
 										/*  아이디 유효성 검사 */
@@ -178,16 +178,18 @@
 													'none');
 											mailCheck = true;
 										}
-										
+
 										/* 전화번호 유효성 검사 */
-										if(phonenum ==""){
-											$('.final_phonenum_ck').css('display','block');
+										if (phonenum == "") {
+											$('.final_phonenum_ck').css(
+													'display', 'block');
 											phonenumCheck = false;
-										}else{
-											$('.final_phonenum_ck').css('display','none');
+										} else {
+											$('.final_phonenum_ck').css(
+													'display', 'none');
 											phonenumCheck = true;
 										}
-										
+
 										/* 주소 유효성 검사 */
 										if (addr == "") {
 											$('.final_addr_ck').css('display',
@@ -201,7 +203,8 @@
 										/* 최종 유효성 검사 */
 										if (idCheck && idckCheck && pwCheck
 												&& pwckCheck && pwckcorCheck
-												&& nameCheck && mailCheck && phonenumCheck
+												&& nameCheck && mailCheck
+												&& phonenumCheck
 												&& addressCheck) {
 											$("#join_form").attr("action",
 													"/member/join");

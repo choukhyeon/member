@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+ <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <html>
 <head>
 <script src="../resources/myLib/jquery-3.2.1.min.js"></script>
@@ -26,45 +27,47 @@
 			<span class="navbar-toggler-icon"></span>
 		</button>
 
-			<div class="collapse navbar-collapse" id="navbarsExample03">
-				<ul class="navbar-nav mr-auto">
-					<li class="nav-item"><a class="nav-link" href="/board/blist">꽃정기구독</a></li>
-					<li class="nav-item"><a class="nav-link" href="/board/blist">꽃다발</a></li>
-					<li class="nav-item"><a class="nav-link" href="/board/blist">Q & A</a></li>
-					<li class="nav-item"><a class="nav-link" href="/board/session">Session확인</a></li>
-				</ul>
-			
-			
+		<div class="collapse navbar-collapse" id="navbarsExample03">
+			<ul class="navbar-nav mr-auto">
+				<li class="nav-item"><a class="nav-link" href="/board/blist">꽃정기구독</a></li>
+				<li class="nav-item"><a class="nav-link" href="/board/blist">꽃다발</a></li>
+				<li class="nav-item"><a class="nav-link" href="/board/blist">Q
+						& A</a></li>
+				<li class="nav-item"><a class="nav-link" href="/board/session">Session확인</a></li>
+			</ul>
+
+
 			<form class="form-inline my-2 my-md-0">
-				<c:if test="${empty loginID}">
+				<c:if test="${member == null}">
 					<a class="bi-person-circle me-1" href="/member/login">로그인</a>&nbsp;&nbsp;
 					<br>
-				</c:if>
-				<c:if test="${empty loginID}">
 					<a class="bi-person-circle me-1" href="/member/join">회원가입</a>&nbsp;&nbsp;
 					<br>
 				</c:if>
-				<c:if test="${not empty loginID}">
-					<a class="bi-person-circle me-1" href="/member/mdetail">내정보</a>&nbsp;&nbsp;
-					<a href="/member/logout">로그아웃</a>&nbsp;&nbsp;
+				<c:if test="${member != null}">
+					<a class="login_success" style="color: white;">내정보</a>&nbsp;&nbsp;
+					<span class="login_success" style="color: white;">회원: ${member.memberName}</span> &nbsp;&nbsp;
+					<span class="login_success" style="color: white;">충전금액:<fmt:formatNumber value="${member.memberMoney}" pattern="\#,###,##" /></span> &nbsp;&nbsp;
+					<span class="login_success" style="color: white;">포인트: <fmt:formatNumber value="${member.memberPoint}" pattern="#,##" /></span>&nbsp;&nbsp;
+					<a href="/member/logout.do">로그아웃</a>
 				</c:if>
 			</form>
 		</div>
 	</nav>
 	<!--section -->
 	<hr>
-		<div> 내용</div>
-		<div> 내용</div>
-		<div> 내용</div>
-		<div> 내용</div>
-		<div> 내용</div>
-		<div> 내용</div>
-		<div> 내용</div>
-		<div> 내용</div>
-		<div> 내용</div>
-		<div> 내용</div>
-		<div> 내용</div>
-		<div> 내용</div>
+	<div>내용</div>
+	<div>내용</div>
+	<div>내용</div>
+	<div>내용</div>
+	<div>내용</div>
+	<div>내용</div>
+	<div>내용</div>
+	<div>내용</div>
+	<div>내용</div>
+	<div>내용</div>
+	<div>내용</div>
+	<div>내용</div>
 	<hr>
 	<!-- Footer-->
 	<footer class="py-5 bg-dark">
