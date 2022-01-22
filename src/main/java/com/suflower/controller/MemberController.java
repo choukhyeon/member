@@ -74,7 +74,8 @@ public class MemberController {
 			HttpSession session = request.getSession();
 			MemberVO lvo = memberservice.memberLogin(member);
 			if(lvo == null) {
-				rttr.addFlashAttribute("result", 0);
+				int result = 0;
+				rttr.addAttribute("result", result);
 				return "redirect: /member/login";
 			}
 			session.setAttribute("member", lvo);
