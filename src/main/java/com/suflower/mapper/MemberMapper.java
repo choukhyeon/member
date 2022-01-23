@@ -20,4 +20,8 @@ public interface MemberMapper {
 
 	@Select("select * from tbl_member ")
 	public List<MemberVO> memberList();
+	
+	// 내정보 확인
+	public MemberVO memberInfo(MemberVO member);
+
 }

@@ -1,5 +1,7 @@
 package com.suflower.domain;
 
+import java.util.Date;
+
 import lombok.Data;
 
 @Data
@@ -13,7 +15,7 @@ public class MemberVO {
 	private String memberAddr3;
 	private String memberPhoneNum;
 	private int adminCheck;
-	private int	memberRegDate;
+	private Date memberRegDate;
 	private int memberMoney;
 	private int memberPoint;
 

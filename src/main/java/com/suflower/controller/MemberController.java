@@ -73,12 +73,13 @@ public class MemberController {
 //			System.out.println("전달된 데이터 :" +member);
 			HttpSession session = request.getSession();
 			MemberVO lvo = memberservice.memberLogin(member);
-			if(lvo == null) {
+			if(lvo == null) {    // 일치하지 않는 아이디, 비밀번호 입력 경우
 				int result = 0;
-				rttr.addAttribute("result", result);
-				return "redirect: /member/login";
+				System.out.println("lvo == "+lvo); /// lvo 값이 null 인지 확인 
+				rttr.addFlashAttribute("result", result);
+				return "redirect:/member/login";
 			}
-			session.setAttribute("member", lvo);
+			session.setAttribute("member", lvo);  // 일치하는 아이디, 비밀번호 경우 (로그인 성공)
 			return "redirect:/";
 		}
 		
@@ -92,5 +93,20 @@ public class MemberController {
 			session.invalidate();
 			
 			return "redirect:/";
+		}
+		
+		// 내정보
+		@RequestMapping(value = "/info", method = RequestMethod.GET)
+		public void MemberInfoGET() {
+			logger.info("memberInfo 진입");
+		}
+		
+		@RequestMapping(value = "/info", method = RequestMethod.POST)
+		public String memberInfoPost(HttpServletRequest request, MemberVO member, RedirectAttributes rttr) throws Exception{
+			HttpSession session = request.getSession();
+			MemberVO vo = memberservice.readMember(member);
+			session.setAttribute("member", vo);
+			
+			return null;
 		}
 }

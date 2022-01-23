@@ -45,7 +45,7 @@
 					<br>
 				</c:if>
 				<c:if test="${member != null}">
-					<a class="login_success" style="color: white;">내정보</a>&nbsp;&nbsp;
+					<a href="/member/info" class="login_success" style="color: white;">내정보</a>&nbsp;&nbsp;
 					<span class="login_success" style="color: white;">회원: ${member.memberName}</span> &nbsp;&nbsp;
 					<span class="login_success" style="color: white;">충전금액:<fmt:formatNumber value="${member.memberMoney}" pattern="\#,###,##" /></span> &nbsp;&nbsp;
 					<span class="login_success" style="color: white;">포인트: <fmt:formatNumber value="${member.memberPoint}" pattern="#,##" /></span>&nbsp;&nbsp;

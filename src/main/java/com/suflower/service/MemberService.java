@@ -12,4 +12,14 @@ public interface MemberService {
 
 	/* 로그인 */
 	public MemberVO memberLogin(MemberVO member) throws Exception;
+	
+
+	//회원정보 보기
+	public MemberVO readMember(MemberVO member);
+	
+	//회원정보 수정
+	public void updateMember(MemberVO vo);
+	
+	//회원정보 삭제
+	public void deleteMember(MemberVO vo);
 }

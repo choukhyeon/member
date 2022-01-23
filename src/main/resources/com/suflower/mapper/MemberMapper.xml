@@ -25,4 +25,14 @@
 		select memberId, memberName, adminCheck, memberMoney, memberPoint from tbl_member
 		where memberId = #{memberId} and memberPassword= #{memberPassword}
 	</select>
+	
+	<!--  내정보  -->
+	<select id="memberInfo"
+		resultType="com.suflower.domain.MemberVO">
+		
+		select memberId, memberPassword, memberName,  
+		memberPoint, memberMail,memberAddr1,memberAddr2,memberAddr3,memberPhoneNum, memberMoney
+		from tbl_member where memberId = #{memberId}
+		
+		</select>
 </mapper>
