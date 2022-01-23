@@ -11,7 +11,13 @@ public class MemberVO {
 	private String memberAddr1;
 	private String memberAddr2;
 	private String memberAddr3;
-	private String memberPhoneNum;
+	
+	private String memberPhoneNum; // > 이터럴방식
+
+	String a = new String("memberID"); // new String 방식
+	
+	String b = new String("memberID"); // new String 방식
+	
 	private int adminCheck;
 	private int	memberRegDate;
 	private int memberMoney;

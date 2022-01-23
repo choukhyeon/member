@@ -17,7 +17,7 @@ import com.suflower.domain.MemberVO;
 import com.suflower.service.MemberService;
 
 @Controller
-@RequestMapping(value = "/member")
+@RequestMapping(value = "/member/*")
 public class MemberController {
 
 	private static final Logger logger = LoggerFactory.getLogger(MemberController.class);

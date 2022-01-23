@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+   <!-- 댓글 입력 -->
+  <mapper namespace="com.suflower.mapper.ReplyMapper">
+  	<insert id="insert">
+		insert into tbl_reply(replyNo,boardNo,replyContent,replyWriter)
+		values (seq_reply.nextval,#{boardNo},#{replyContent},#{replyWriter})  
+  	</insert>
+  	
+  	<!-- 댓글 조회 -->
+  	<select id="read" resultType="com.suflower.domain.ReplyVO">
+  		select * from tbl_reply where replyNo=#{replyNo}
+  	</select>
+  	
+  </mapper>
+  
