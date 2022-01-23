@@ -17,7 +17,7 @@ import com.suflower.domain.MemberVO;
 import com.suflower.service.MemberService;
 
 @Controller
-@RequestMapping(value = "/member")
+@RequestMapping(value = "/member/*")
 public class MemberController {
 
 	private static final Logger logger = LoggerFactory.getLogger(MemberController.class);
@@ -73,10 +73,17 @@ public class MemberController {
 //			System.out.println("전달된 데이터 :" +member);
 			HttpSession session = request.getSession();
 			MemberVO lvo = memberservice.memberLogin(member);
+<<<<<<< HEAD
 			if(lvo == null) {    // 일치하지 않는 아이디, 비밀번호 입력 경우
 				int result = 0;
 				System.out.println("lvo == "+lvo); /// lvo 값이 null 인지 확인 
 				rttr.addFlashAttribute("result", result);
+=======
+
+			if(lvo ==null) {
+				int result =0;
+				rttr.addFlashAttribute("result",result);
+>>>>>>> 4fa2784828c41a8c2a467ae5f91f1572576a0f88
 				return "redirect:/member/login";
 			}
 			session.setAttribute("member", lvo);  // 일치하는 아이디, 비밀번호 경우 (로그인 성공)
@@ -84,17 +91,18 @@ public class MemberController {
 		}
 		
 		/* 메인페이지 로그아웃 */
-		@RequestMapping(value = "logout", method = RequestMethod.GET)
-		public String logoutMainGET(HttpServletRequest request) throws Exception{
-			logger.info("logoutMainGET메서드 진입");
+		@RequestMapping(value = "logout.do", method = RequestMethod.POST)
+		@ResponseBody
+		public void logoutMainPOST(HttpServletRequest request) throws Exception{
+			logger.info("비동기 로그아웃 메서드 진입");
 			
 			HttpSession session = request.getSession();
 			
 			session.invalidate();
 			
-			return "redirect:/";
 		}
 		
+<<<<<<< HEAD
 		// 내정보
 		@RequestMapping(value = "/info", method = RequestMethod.GET)
 		public void MemberInfoGET() {
@@ -109,4 +117,7 @@ public class MemberController {
 			
 			return null;
 		}
+=======
+		/* 정보 수정 */
+>>>>>>> 4fa2784828c41a8c2a467ae5f91f1572576a0f88
 }

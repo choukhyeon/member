@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
- <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <html>
 <head>
 <script src="../resources/myLib/jquery-3.2.1.min.js"></script>
@@ -15,6 +15,10 @@
 <!-- Core theme CSS (includes Bootstrap)-->
 <link rel="stylesheet" type="text/css"
 	href="${pageContext.request.contextPath}/resources/myLib/strapStyle.css">
+	<script
+  src="https://code.jquery.com/jquery-3.4.1.js"
+  integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
+  crossorigin="anonymous"></script>
 </head>
 <body>
 	<!--navigation -->
@@ -39,17 +43,31 @@
 
 			<form class="form-inline my-2 my-md-0">
 				<c:if test="${member == null}">
-					<a class="bi-person-circle me-1" href="/member/login">로그인</a>&nbsp;&nbsp;
-					<br>
-					<a class="bi-person-circle me-1" href="/member/join">회원가입</a>&nbsp;&nbsp;
-					<br>
+					<a class="bi-person-circle me-1" href="/member/login">로그인</a>
+
+					<a class="bi-person-circle me-1" href="/member/join">회원가입</a>
+
 				</c:if>
 				<c:if test="${member != null}">
+<<<<<<< HEAD
 					<a href="/member/info" class="login_success" style="color: white;">내정보</a>&nbsp;&nbsp;
 					<span class="login_success" style="color: white;">회원: ${member.memberName}</span> &nbsp;&nbsp;
 					<span class="login_success" style="color: white;">충전금액:<fmt:formatNumber value="${member.memberMoney}" pattern="\#,###,##" /></span> &nbsp;&nbsp;
 					<span class="login_success" style="color: white;">포인트: <fmt:formatNumber value="${member.memberPoint}" pattern="#,##" /></span>&nbsp;&nbsp;
 					<a href="/member/logout.do">로그아웃</a>
+=======
+					<c:if test="${member.adminCheck == 1}">
+						<a href="/admin/adminPage">관리자 페이지</a>
+					</c:if>
+					<span class="login_success" style="color: white;">회원:
+						${member.memberName}</span> &nbsp;&nbsp;
+					<span class="login_success" style="color: white;">충전금액:<fmt:formatNumber
+							value="${member.memberMoney}" pattern="\#,###,##" /></span> &nbsp;&nbsp;
+					<span class="login_success" style="color: white;">포인트: <fmt:formatNumber
+							value="${member.memberPoint}" pattern="#,##" /></span>&nbsp;&nbsp;
+					<a class="login_success" style="color: white;">정보수정</a>&nbsp;&nbsp;
+					<a id="logout_button">로그아웃</a>
+>>>>>>> 4fa2784828c41a8c2a467ae5f91f1572576a0f88
 				</c:if>
 			</form>
 		</div>
@@ -90,6 +108,20 @@
 		</div>
 
 	</footer>
+	
+	<script>
+	/* 로그아웃 버튼 작동 */
+	$("#logout_button").click(function(){
+		$.ajax({
+			type: "POST",
+			url:"/member/logout.do",
+			success:function(data){
+				alert("로그아웃 성공");
+				document.location.reload();
+			}
+		})
+	})
+	</script>
 </body>
 </html>
 

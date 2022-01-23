@@ -24,10 +24,10 @@
 	<!-- 게시물 페이징 조회 -->
 	<select id="getListPaging" resultType="com.suflower.domain.BoardVO">
     <![CDATA[
-        
         select boardNo, boardTitle, boardContent, boardWriter, boardRegDate, boardUpdateDate from(
                 select rownum  as rn, boardNo, boardTitle, boardContent, boardWriter, boardRegDate, boardUpdateDate
-                from tbl_board where rownum <= #{pageNum} * #{amount} 
+                from tbl_board where rownum <= #{pageNum} * #{amount}
+  
     ]]>
 		<if test="keyword != null">
 			and boardTitle like '%'||#{keyword}||'%'

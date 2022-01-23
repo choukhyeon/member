@@ -11,6 +11,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.suflower.domain.BoardVO;
@@ -55,25 +56,11 @@ public class BoardController {
 
 	// 게시글 조회
 	@GetMapping("/get")
-	public String boardGetPageGET(long boardNo, Model model, Criteria cri, HttpServletRequest request,MemberVO vo,RedirectAttributes rttr) {
-		if (request.getAttribute("loginID") != null) {
-			// request.getSession(false)를 하면 세션 없으면 그냥 null으로 표기
-			// 반대로 request.getSession() 을 하면 세션이 없으면 만듦
-			if (vo.getMemberId() == null || vo.getMemberId().length() < 1) {
-				HttpSession session = request.getSession(false);
-				System.out.println("vo=>" + vo.getMemberId());
-				if (session != null && session.getAttribute("loginID") != null) {
-					vo.setMemberId((String) session.getAttribute("loginID"));
-					System.out.println(session.getAttribute("loginID"));
-					System.out.println("게시글 진입");
-					model.addAttribute("pageInfo", bservice.getPage(boardNo));
-					model.addAttribute("cri", cri);
-					return "redirect:/board/bwrite";
-				}
-			}
-		}else {
-			rttr.addFlashAttribute("result", "login check");}
-			return "redirect:/member/login";
+	public void boardGetPageGET(long boardNo, Model model, Criteria cri, HttpServletRequest request, MemberVO vo,
+			RedirectAttributes rttr) {
+		System.out.println("게시글 진입");
+		model.addAttribute("pageInfo", bservice.getPage(boardNo));
+		model.addAttribute("cri", cri);
 	}
 
 	// 게시판 작성폼 (bwrite)
@@ -89,7 +76,7 @@ public class BoardController {
 		model.addAttribute("cri", cri);
 	}
 
-	// 페이지 수정
+	// 페이지 수정완료
 	@PostMapping("/modify")
 	public String boardModifyPOST(BoardVO board, RedirectAttributes rttr) {
 		bservice.modify(board);
