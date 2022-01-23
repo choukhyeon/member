@@ -7277,6 +7277,9 @@ textarea.form-control-lg {
 .my-2 {
   margin-top: 0.5rem !important;
   margin-bottom: 0.5rem !important;
+  position: absolute;
+  right: 20;
+  
 }
 
 .my-3 {
@@ -11317,4 +11320,8 @@ textarea.form-control-lg {
     line-height: 22px;
     border-radius: 25px;
     color: #606267;    
+}
+
+#logout_button{
+	color: white;
 }
