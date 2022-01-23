@@ -73,10 +73,10 @@ public class MemberController {
 //			System.out.println("전달된 데이터 :" +member);
 			HttpSession session = request.getSession();
 			MemberVO lvo = memberservice.memberLogin(member);
-			System.out.println(lvo+"lvo값");
-			if(lvo == null) {
-				System.out.println(lvo+"IF문 돌려서 null IF에 들어옴");
-				rttr.addFlashAttribute("IDcheck","아이디나 비밀번호를 확인하세요");
+
+			if(lvo ==null) {
+				int result =0;
+				rttr.addFlashAttribute("result",result);
 				return "redirect:/member/login";
 			}
 			session.setAttribute("member", lvo);
@@ -84,14 +84,16 @@ public class MemberController {
 		}
 		
 		/* 메인페이지 로그아웃 */
-		@RequestMapping(value = "logout", method = RequestMethod.GET)
-		public String logoutMainGET(HttpServletRequest request) throws Exception{
-			logger.info("logoutMainGET메서드 진입");
+		@RequestMapping(value = "logout.do", method = RequestMethod.POST)
+		@ResponseBody
+		public void logoutMainPOST(HttpServletRequest request) throws Exception{
+			logger.info("비동기 로그아웃 메서드 진입");
 			
 			HttpSession session = request.getSession();
 			
 			session.invalidate();
 			
-			return "redirect:/";
 		}
+		
+		/* 정보 수정 */
 }
