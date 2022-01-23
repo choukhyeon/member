@@ -15,5 +15,19 @@
   		select * from tbl_reply where replyNo=#{replyNo}
   	</select>
   	
+  	<!-- 댓글 삭제 -->
+  	<delete id="delete">
+  		delete from tbl_reply where replyNo = #{replyNo}
+  	</delete>
+  	
+  	<update id="update">
+  		update tbl_reply set reply =#{reply},updatedate = sysdate where replyNo = #{replyNo}
+  	</update>
+  	
+  	<select id="getListWithPaging">
+  		select replyNo,boardNo,replyContent,replyWriter,replyDate,replyUpdateDate from tbl_reply
+  		where boardNo = #{boardNo}
+  		order by replyNo asc
+  	</select>
   </mapper>
   

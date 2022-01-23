@@ -73,10 +73,11 @@ public class MemberController {
 //			System.out.println("전달된 데이터 :" +member);
 			HttpSession session = request.getSession();
 			MemberVO lvo = memberservice.memberLogin(member);
+			System.out.println(lvo+"lvo값");
 			if(lvo == null) {
-				int result = 0;
-				rttr.addAttribute("result", result);
-				return "redirect: /member/login";
+				System.out.println(lvo+"IF문 돌려서 null IF에 들어옴");
+				rttr.addFlashAttribute("IDcheck","아이디나 비밀번호를 확인하세요");
+				return "redirect:/member/login";
 			}
 			session.setAttribute("member", lvo);
 			return "redirect:/";

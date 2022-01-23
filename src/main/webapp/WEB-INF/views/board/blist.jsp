@@ -34,8 +34,8 @@
 			<c:forEach items="${blist}" var="blist">
 				<tr>
 					<td><c:out value="${blist.boardNo}" /></td>
-					<td><a class="move" href='<c:out value="${blist.boardNo}"/>'>
-							<c:out value="${blist.boardTitle}" />
+					<td>  <a class="move" href='<c:out value="${blist.boardNo}"/>'>
+      				<c:out value="${blist.boardTitle}"/>
 					</a></td>
 					<td><c:out value="${blist.boardWriter}" /></td>
 					<td><fmt:formatDate pattern="yyyy.MM.dd hh:mm"
@@ -62,10 +62,10 @@
 					</c:if>
 
 					<!-- 각 번호 페이지 버튼 -->
-					<c:forEach var="num" begin="${pageMaker.startPage}"
-						end="${pageMaker.endPage}">
-						<li class="pageInfo_btn"><a href="${num}">${num}</a></li>
-					</c:forEach>
+					 <c:forEach var="num" begin="${pageMaker.startPage}" end="${pageMaker.endPage}">
+                    <li class="pageInfo_btn ${pageMaker.cri.pageNum == num ? " active":"" }"><a href="${num}">${num}</a></li>
+                </c:forEach>
+
 
 
 					<!--  다음 페이지 버튼 -->
@@ -94,40 +94,27 @@
 		$(document).ready(function() {
 
 			var result = '<c:out value="${result}"/>';
-			checkModal(result);
-			function checkModal(result) {
+			checkAlert(result);
+			function checkAlert(result) {
 				if (result === '') {
 					return;
-				}
+					}
 				if (result === "bwrite success") {
 					alert("작성이 완료됐당..");
-				}
-				$("#myModal").modal("show");
-				if (result === "delete success") {
-					$(".modal-body").html("게시글 삭제가 완료되었습니다.");
-				}
-				$("#myModal").modal("show");
+					}
 				if (result === "modify success") {
-					$(".modal-body").html("게시글 수정이 완료되었습니다.");
+					alert("수정이 완료됐당..");
+					}
 				}
-				$("#myModal").modal("show");
-				if (result === "login check") {
-					$(".modal-body").html("로그인후 이용해주세용.");
-				}
-				$("#myModal").modal("show");
-
-			}
 		}); 
 
 		let moveForm = $("#moveForm");
-		$(".move").on(
-				"click",
-				function(e) {
+		$(".move").on("click",function(e) {
 					e.preventDefault();
 
 					moveForm.append("<input type='hidden' name='boardNo' value='"
 							+ $(this).attr("href") + "'>");
-					moveForm.attr("action", "/board/get");
+					moveForm.attr("action","/board/get");
 					moveForm.submit();
 				});
 
