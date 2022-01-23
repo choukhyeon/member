@@ -49,13 +49,6 @@
 
 				</c:if>
 				<c:if test="${member != null}">
-<<<<<<< HEAD
-					<a href="/member/info" class="login_success" style="color: white;">내정보</a>&nbsp;&nbsp;
-					<span class="login_success" style="color: white;">회원: ${member.memberName}</span> &nbsp;&nbsp;
-					<span class="login_success" style="color: white;">충전금액:<fmt:formatNumber value="${member.memberMoney}" pattern="\#,###,##" /></span> &nbsp;&nbsp;
-					<span class="login_success" style="color: white;">포인트: <fmt:formatNumber value="${member.memberPoint}" pattern="#,##" /></span>&nbsp;&nbsp;
-					<a href="/member/logout.do">로그아웃</a>
-=======
 					<c:if test="${member.adminCheck == 1}">
 						<a href="/admin/adminPage">관리자 페이지</a>
 					</c:if>
@@ -65,9 +58,8 @@
 							value="${member.memberMoney}" pattern="\#,###,##" /></span> &nbsp;&nbsp;
 					<span class="login_success" style="color: white;">포인트: <fmt:formatNumber
 							value="${member.memberPoint}" pattern="#,##" /></span>&nbsp;&nbsp;
-					<a class="login_success" style="color: white;">정보수정</a>&nbsp;&nbsp;
+					<a href="/member/info" class="login_success" style="color: white;">내정보</a>&nbsp;&nbsp;
 					<a id="logout_button">로그아웃</a>
->>>>>>> 4fa2784828c41a8c2a467ae5f91f1572576a0f88
 				</c:if>
 			</form>
 		</div>
