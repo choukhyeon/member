@@ -4,7 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.suflower.mapper.MemberMapper;
-import com.suflower.domain.MemberVO;
+import com.suflower.domain.MemberDTO;
 
 @Service
 public class MemberServiceImpl implements MemberService {
@@ -14,7 +14,7 @@ public class MemberServiceImpl implements MemberService {
 	
 	/* 회원가입 */
 	@Override
-	public void memberJoin(MemberVO member) throws Exception{
+	public void memberJoin(MemberDTO member) throws Exception{
 		membermapper.memberJoin(member);
 	}
 	
@@ -27,22 +27,24 @@ public class MemberServiceImpl implements MemberService {
 	
 	/* 로그인 */
 	@Override
-	public MemberVO memberLogin(MemberVO member) throws Exception{
+	public MemberDTO memberLogin(MemberDTO member) throws Exception{
 		return membermapper.memberLogin(member);
 	}
 	
+	/* 내정보 */
 	@Override
-	public MemberVO readMember(MemberVO member) {
+	public MemberDTO readMember(MemberDTO member) {
 		return membermapper.memberInfo(member);
 	}
 	
+	/* 내정보 수정 */
 	@Override
-	public void updateMember(MemberVO vo) {
-		
+	public int updateMember(MemberDTO member) {
+		return membermapper.memberUpdate(member);
 	}
 	
 	@Override
-	public void deleteMember(MemberVO vo) {
+	public void deleteMember(MemberDTO vo) {
 		
 	}
 }

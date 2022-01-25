@@ -16,7 +16,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.suflower.domain.BoardVO;
 import com.suflower.domain.Criteria;
-import com.suflower.domain.MemberVO;
+import com.suflower.domain.MemberDTO;
 import com.suflower.domain.PageMakerDTO;
 import com.suflower.service.BoardService;
 import com.suflower.service.MemberService;
@@ -56,7 +56,7 @@ public class BoardController {
 
 	// 게시글 조회
 	@GetMapping("/get")
-	public void boardGetPageGET(long boardNo, Model model, Criteria cri, HttpServletRequest request, MemberVO vo,
+	public void boardGetPageGET(long boardNo, Model model, Criteria cri, HttpServletRequest request, MemberDTO vo,
 			RedirectAttributes rttr) {
 		System.out.println("게시글 진입");
 		model.addAttribute("pageInfo", bservice.getPage(boardNo));

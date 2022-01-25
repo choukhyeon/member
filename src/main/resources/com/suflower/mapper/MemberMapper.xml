@@ -20,19 +20,31 @@
 
 	<!-- 로그인 -->
 	<select id="memberLogin"
-		resultType="com.suflower.domain.MemberVO">
+		resultType="com.suflower.domain.MemberDTO">
 
-		select memberId, memberName, adminCheck, memberMoney, memberPoint from tbl_member
+		select * from tbl_member
 		where memberId = #{memberId} and memberPassword= #{memberPassword}
 	</select>
 	
 	<!--  내정보  -->
 	<select id="memberInfo"
-		resultType="com.suflower.domain.MemberVO">
+		resultType="com.suflower.domain.MemberDTO">
 		
-		select memberId, memberPassword, memberName,  
-		memberPoint, memberMail,memberAddr1,memberAddr2,memberAddr3,memberPhoneNum, memberMoney
-		from tbl_member where memberId = #{memberId}
+		select * from tbl_member where memberId = #{memberId}
 		
-		</select>
+	</select>
+	
+	<!-- 	내정보 수정	 -->
+	<update id="memberUpdate">
+		update tbl_member 
+		set memberPassword= #{memberPassword},
+		memberName=#{memberName},
+		memberAddr1=#{memberAddr1},
+		memberAddr2=#{memberAddr2},
+		memberAddr3=#{memberAddr3},
+		memberMail = #{memberMail},
+		memberPhoneNum = #{memberPhoneNum}
+		where memberId = #{memberId}
+		
+	</update>
 </mapper>

@@ -1,6 +1,8 @@
 package com.suflower.controller;
 
 
+import java.lang.ProcessBuilder.Redirect;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -8,12 +10,15 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.suflower.domain.MemberVO;
+import com.suflower.domain.MemberDTO;
 import com.suflower.service.MemberService;
 
 @Controller
@@ -27,15 +32,15 @@ public class MemberController {
 	
 	
 	//회원가입 페이지 이동
-	@RequestMapping(value = "/join", method = RequestMethod.GET)
+	@GetMapping("/join")
 	public void loginGET() {
 		
 		logger.info("회원가입 페이지 진입");
 	}
 	
 	//회원가입
-	@RequestMapping(value="/join", method=RequestMethod.POST)
-	public String joinPOST(MemberVO member) throws Exception{
+	@PostMapping("/join")
+	public String joinPOST(MemberDTO member) throws Exception{
 		logger.info("join 진입");
 		// 회원가입 서비스 실행
 		memberservice.memberJoin(member);
@@ -46,7 +51,7 @@ public class MemberController {
 	
 	
 	// 아이디 중복 검사
-		@RequestMapping(value = "/memberIdChk", method = RequestMethod.POST)
+		@PostMapping("/memberIdChk")
 		@ResponseBody
 		public String memberIdChkPOST(String memberId) throws Exception{
 			/* logger.info("memberIdChk() 진입"); */
@@ -61,18 +66,18 @@ public class MemberController {
 		} // memberIdChkPOST() 종료
 		
 		//로그인 페이지 이동
-		@RequestMapping(value = "/login", method = RequestMethod.GET)
+		@GetMapping("/login")
 		public void joinGET() {
 			logger.info("로그인 페이지 진입");
 		}
 		
 		/* 로그인 */
-		@RequestMapping(value = "/login", method = RequestMethod.POST)
-		public String loginPOST(HttpServletRequest request, MemberVO member, RedirectAttributes rttr) throws Exception{
+		@PostMapping("/login")
+		public String loginPOST(HttpServletRequest request, MemberDTO member, RedirectAttributes rttr) throws Exception{
 //			System.out.println("login 메서드 진입");
 //			System.out.println("전달된 데이터 :" +member);
 			HttpSession session = request.getSession();
-			MemberVO lvo = memberservice.memberLogin(member);
+			MemberDTO lvo = memberservice.memberLogin(member);
 
 			if(lvo ==null) {
 				int result =0;
@@ -84,7 +89,7 @@ public class MemberController {
 		}
 		
 		/* 메인페이지 로그아웃 */
-		@RequestMapping(value = "logout.do", method = RequestMethod.POST)
+		@PostMapping("logout.do")
 		@ResponseBody
 		public void logoutMainPOST(HttpServletRequest request) throws Exception{
 			logger.info("비동기 로그아웃 메서드 진입");
@@ -96,18 +101,43 @@ public class MemberController {
 		}
 		
 		// 내정보
-		@RequestMapping(value = "/info", method = RequestMethod.GET)
-		public void MemberInfoGET() {
+		@GetMapping("/info")
+		public void MemberInfoGET() {	
 			logger.info("memberInfo 진입");
+			
 		}
 		
-		@RequestMapping(value = "/info", method = RequestMethod.POST)
-		public String memberInfoPost(HttpServletRequest request, MemberVO member, RedirectAttributes rttr) throws Exception{
-			HttpSession session = request.getSession();
-			MemberVO vo = memberservice.readMember(member);
-			session.setAttribute("member", vo);
+		@PostMapping("/info")
+		public String memberInfoPost(HttpServletRequest request, MemberDTO member, RedirectAttributes rttr) throws Exception{
 			
-			return null;
+			HttpSession session = request.getSession();
+			MemberDTO dto = memberservice.readMember(member);
+			session.setAttribute("member", dto);
+			return "redirect:/member/info";
 		}
+
+		
 		/* 정보 수정 */
+		@GetMapping("/update")
+		public void MemberUpdateGET() {	
+			logger.info("memberUpdate 진입");
+			
+		}
+		
+		@PostMapping("/update")
+		public String memberUpdatePost(HttpServletRequest request, MemberDTO member, RedirectAttributes rttr) throws Exception{
+			
+			HttpSession session = request.getSession();
+			if (memberservice.updateMember(member)>0) {
+				// update 성공
+				rttr.addFlashAttribute("message","회원정보 수정 완료");
+				request.getSession().setAttribute("memberId", member.getMemberId());
+				return "redirect:/member/info";
+			} else {
+				// update 실패
+				rttr.addFlashAttribute("message","회원 정보 수정 실패");
+				return "redirect:/member/update";
+			}
+		}
+		
 }
